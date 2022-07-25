@@ -1,0 +1,180 @@
+\documentclass{beamer}
+\usepackage[utf8]{inputenc}
+
+\usetheme{Madrid}
+\usecolortheme{default}
+
+%------------------------------------------------------------
+%This block of code defines the information to appear in the
+%Title page
+\title[Regression] %optional
+{Linear and Logistic Regression}
+
+\subtitle{and their usage in Machine Learning}
+
+\author[Ashwin Abraham] % (optional)
+{Ashwin Abraham}
+
+\institute[Summer of Science] % (optional)
+{
+  %\inst{1}%
+  Mentor:\\
+  Garweet Sresth
+}
+
+\date[2022] % (optional)
+{Summer of Science, 2022}
+
+% \logo{\includegraphics[height=1cm]{overleaf-logo}}
+
+%End of title page configuration block
+%------------------------------------------------------------
+
+
+
+%------------------------------------------------------------
+%The next block of commands puts the table of contents at the 
+%beginning of each section and highlights the current section:
+
+\AtBeginSection[]
+{
+  \begin{frame}
+    \frametitle{Table of Contents}
+    \tableofcontents[currentsection]
+  \end{frame}
+}
+%------------------------------------------------------------
+
+
+\begin{document}
+
+    %The next statement creates the title page.
+    \frame{\titlepage}
+
+
+    %---------------------------------------------------------
+    %This block of code is for the table of contents after
+    %the title page
+    \begin{frame}
+        \frametitle{Table of Contents}
+        \tableofcontents
+    \end{frame}
+    %---------------------------------------------------------
+
+
+    \section{Use of Regression in Machine Learning}
+
+    %---------------------------------------------------------
+    %Changing visivility of the text
+    \begin{frame}
+        \frametitle{Use of Regression in Machine Learning}
+        Regression is the statistical process to find the relationship between a dependent variable and an independent variable that minimizes some 
+        cost function, given a set of datapoints. The notion of what we mean by "best representation" is formalized by the cost function. This is a function of the dataset given to us and the 
+        approximate relationship we use to model the relationship between the dependent and independent variables. The best representation of this 
+        relation is the one that has the least cost (minimizes the value of the cost function).
+    \end{frame}
+
+    \begin{frame}
+        \frametitle{Use of Regression in Machine Learning}
+        A system implementing Machine Learning techniques must be trained with a large amount of data and it must use the data it has been trained with 
+        in order to find ways of handling data that it has not come across before. This can be done effectively using regression techniques. The Machine 
+        can use regression analysis on the training data to get a relation between the data and the desired outcome. If the outcome is a binary decision, 
+        Logistic regression may be used, and if it is a continuous outcome, Linear regression may be used. The relation obtained is applied on the new data 
+        to get the outcome required.
+    \end{frame}
+
+    %---------------------------------------------------------
+
+    \section{Linear Regression}
+
+    %---------------------------------------------------------
+    %Highlighting text
+    \begin{frame}
+        \frametitle{Linear Regression}
+        In linear regression, we impose the constraint that approximate relationship between the dependent and independent variables should be a linear 
+        function. The cost function usually chosen for regression problems is the sum of squares function (leading the method itself to be called the 
+        method of least squares). 
+
+        If there are $N$ datapoints of the form $(x_{i}, y_{i})$ and the relation function is $f$, then the cost of $f$ is then  defined as:
+        \begin{equation}
+            C(f) = \sum_{i = 1}^{n} ||y_{i} - f(x_{i})||^{2}
+        \end{equation}
+        Here, if there are more than $1$ dependent/independent variable, $x$ and $y$ become vectors.
+    \end{frame}
+    %---------------------------------------------------------
+
+    \begin{frame}
+        \frametitle{Linear Regression}
+        Assuming $f$ is linear and there are only $1$ dependent and $1$ independent variable, we get $f(x) = Ax + B$. 
+        Now we must find constants $A$ and $B$ such that $C(f) = C(A, B)$ is minimized. Now,
+        \begin{block}{Cost function for Linear Regression}
+            \begin{equation}
+                C(A, B) = \sum_{i = 1}^{n} (y_{i} - Ax_{i} - B)^{2}
+            \end{equation}
+        \end{block}
+    \end{frame}
+
+    \begin{frame}
+        \frametitle{Linear Regression}
+        Assuming $f$ is linear and there are only $1$ dependent and $1$ independent variable, we get $f(x) = Ax + B$. 
+        Now we must find constants $A$ and $B$ such that $C(f) = C(A, B)$ is minimized.
+
+
+        Simplifying, we get a system of Linear equations in $A$ and $B$:
+        \begin{equation}
+            A(\sum_{i = 1}^{n} x_{i}^{2}) + B(\sum_{i = 1}^{n} x_{i}) = \sum_{i = 1}^{n} x_{i}y_{i}
+        \end{equation}
+        \begin{equation}
+            A(\sum_{i = 1}^{n} x_{i}) + Bn = \sum_{i = 1}^{n} y_{i}
+        \end{equation}
+
+    \end{frame}
+
+    \begin{frame}
+        \frametitle{Linear Regression}
+        Assuming $f$ is linear and there are only $1$ dependent and $1$ independent variable, we get $f(x) = Ax + B$. 
+        Now we must find constants $A$ and $B$ such that $C(f) = C(A, B)$ is minimized.
+
+        
+        Note, that since in the RMS-AM inequality ($n(\sum_{i = 1}^{n} x_{i}^{2}) \geq (\sum_{i = 1}^{n} x_{i})^{2}$), equality occurs only when all 
+        $x_{i}$ are equal (which can never happen with a proper data set), this equation will always have a unique solution, given by:
+        \begin{block}{General solution of the two dimensional linear regression problem}
+            \begin{equation}
+                A = \frac{n(\sum x_{i}y_{i}) - (\sum x_{i})(\sum y_{i})}{n(\sum x_{i}^{2}) - (\sum x_{i})^{2}}
+            \end{equation}
+            \begin{equation}
+                B = \frac{(\sum y_{i})(\sum x_{i}^{2}) - (\sum x_{i}y_{i})(\sum x_{i})}{n(\sum x_{i}^{2}) - (\sum x_{i})^{2}}
+            \end{equation}    
+        \end{block}
+    \end{frame}
+
+    \section{Logistic Regression}
+    
+    \begin{frame}
+        \frametitle{Logistic Regression}
+        In a logistic regression on the other hand, the dependent variable is constrained to be only either $0$ or $1$.
+
+
+        In this case, the best approximation to the relation between the dependent and independent variables will also be the
+        Probability Function of the dependent variable (this is a function of the independent variables that gives the probability 
+        that the dependent variable will be $1$ for a particular choice of independent variables).
+    \end{frame}
+
+    \begin{frame}
+        \frametitle{Logistic Regression}
+
+        \begin{block}{Cost Function for Logistic Regression}
+            \begin{equation}
+                C(p) = -\sum_{i = 1}^{n} [y_{i}\ln(p(x_{i})) + (1-y_{i})\ln(1 - p(x_{i}))]
+            \end{equation}
+        \end{block}
+
+        \begin{block}{Relation between independent and dependent variable}
+            \begin{equation}
+                p(x) = \frac{1}{1 + \exp(-(Ax + B))}
+            \end{equation}
+        \end{block}
+        Now, expressing $C$ in terms of $A$ and $B$ and then imposing the condition that $\frac{\partial C}{\partial A} = \frac{\partial C}{\partial B} = 0$, 
+        we get the values of $A$ and $B$. Note that the equations involved may not always have exact solutions and may have to be solved numerically.    
+    \end{frame}
+\end{document}
